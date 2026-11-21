@@ -1,5 +1,8 @@
-/data/
+data/*
+!data/
 !data/kieco_chemistry_joined.csv
+!data/insecta_kieco_map.json
+!data/quarrying_insectid_label_map.txt
 web/node_modules/
 backend/.venv/
 __pycache__/
@@ -10,3 +13,5 @@ web/dist/
 web/public/data/wales_rivers_background.geojson
 design-handoff/prototype/src/data/
 .DS_Store
+modal/vendor/
+modal/__pycache__/

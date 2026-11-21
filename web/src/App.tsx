@@ -2,10 +2,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { AppHeader, type Profile } from "./components/AppHeader";
 import { DexScreen } from "./components/DexScreen";
 import { SiteSidebar } from "./components/SiteSidebar";
+import { UploadFlow } from "./components/UploadFlow";
+import { UnlockModal } from "./components/UnlockModal";
+import { CoordinatorPanel } from "./components/CoordinatorPanel";
+import { ROD_DEMO_SITE } from "./lib/rodDemo";
 import { MapView } from "./map/MapView";
 import { loadSitesGeoJSON, parseSiteProperties, type SitesFeatureCollection } from "./lib/data";
-import { DEX_FAMILIES } from "./lib/families";
-import { loadDex } from "./lib/dex";
+import { DEX_FAMILIES, commonName, isDexFamily } from "./lib/families";
+import { loadDex, saveDex } from "./lib/dex";
 import { formatSiteName } from "./lib/siteName";
 import { loadSiteSeries, type SiteSeries } from "./lib/series";
 import { statusOf } from "./lib/staleness";
@@ -38,7 +42,9 @@ export default function App() {
   const [profile, setProfile] = useState<Profile>("kick");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [focusNonce, setFocusNonce] = useState(0);
-  const [dex] = useState(loadDex);
+  const [dex, setDex] = useState(loadDex);
+  const [uploadFor, setUploadFor] = useState<string | null>(null);
+  const [unlock, setUnlock] = useState<string[] | null>(null);
   const [showDex, setShowDex] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const dexCount = DEX_FAMILIES.filter((f) => dex.has(f)).length;
@@ -52,6 +58,10 @@ export default function App() {
     ])
       .then(([background, reaches, sites]) => {
         if (cancelled) return;
+        // MOCK: one red site has a camera rod recording this week (lib/rodDemo.ts)
+        for (const f of [...reaches.features, ...sites.features] as { properties: Record<string, unknown> }[]) {
+          if (f.properties.site_id === ROD_DEMO_SITE) f.properties.rod_active = true;
+        }
         setData({ background, reaches, sites });
         // ?site=<id> deep link (shareable), else the demo site
         const wanted = new URLSearchParams(window.location.search).get("site") ?? DEMO_SITE;
@@ -78,6 +88,26 @@ export default function App() {
   const feature = selectedId ? byId.get(selectedId) : undefined;
   const site = feature ? parseSiteProperties(feature.properties as unknown as Record<string, unknown>) : null;
 
+  const common = (f: string) => commonName(f, catalog);
+
+  const changeProfile = (p: Profile) => {
+    setProfile(p);
+    if (p === "coordinator") setSelectedId(null); // coordinators land on the overview
+  };
+
+  const addToDex = (families: string[]) => {
+    const fresh = families.filter((f) => isDexFamily(f) && !dex.has(f));
+    const next = new Set([...dex, ...families.filter(isDexFamily)]);
+    setDex(next);
+    saveDex(next);
+    if (site?.staleness === "stale") setToast("Badge earned: Sampled a red site");
+    if (fresh.length) setUnlock(fresh);
+    else {
+      setUploadFor(null);
+      setToast("Saved. No new Dex families this time.");
+    }
+  };
+
   const changeCatchment = (c: string) => {
     setCatchment(c);
     if (site && site.catchment !== c) setSelectedId(null);
@@ -99,7 +129,7 @@ export default function App() {
     <div className="app">
       <AppHeader
         catchment={catchment} onCatchment={changeCatchment}
-        profile={profile} onProfile={setProfile}
+        profile={profile} onProfile={changeProfile}
         dexCount={dexCount}
         dexTotal={DEX_FAMILIES.length}
         onDex={() => setShowDex(true)}
@@ -114,7 +144,7 @@ export default function App() {
               <MapView
                 background={data.background} reaches={data.reaches} sites={data.sites}
                 catchment={catchment} selectedId={selectedId}
-                selectedStatus={site ? statusOf(site.staleness) : null}
+                selectedStatus={site ? statusOf(site.staleness, site.site_id === ROD_DEMO_SITE) : null}
                 selectedName={site ? formatSiteName(site.site_name) : null}
                 focusNonce={focusNonce} onSelect={setSelectedId}
               />
@@ -124,10 +154,14 @@ export default function App() {
             {site ? (
               <SiteSidebar
                 key={site.site_id} site={site} profile={profile} catalog={catalog} series={series[site.site_id]} dex={dex}
+                rodActive={site.site_id === ROD_DEMO_SITE}
                 onClose={() => setSelectedId(null)}
-                onUpload={() => setToast("The upload screen is next on the build list")}
+                onUpload={() => setUploadFor(site.site_id)}
                 onToast={setToast}
               />
+            ) : profile === "coordinator" && data ? (
+              <CoordinatorPanel sites={data.sites} catchment={catchment} onToast={setToast}
+                onSelect={(id) => { setSelectedId(id); setFocusNonce((n) => n + 1); }} />
             ) : (
               <aside className="sidebar sidebar--empty">
                 <h2 className="h-display-s">Pick a river reach</h2>
@@ -135,9 +169,18 @@ export default function App() {
                 <button type="button" className="btn btn--primary" onClick={assignRed}>Assign me a red site</button>
               </aside>
             )}
+            {uploadFor && site && (
+              <UploadFlow siteId={site.site_id} siteName={formatSiteName(site.site_name)} dex={dex} common={common}
+                onClose={() => setUploadFor(null)} onAddToDex={addToDex} />
+            )}
           </>
         )}
       </main>
+      {unlock && site && (
+        <UnlockModal families={unlock} siteName={formatSiteName(site.site_name)} catalog={catalog} common={common} dexCount={dexCount}
+          onClose={() => { setUnlock(null); setUploadFor(null); }}
+          onViewDex={() => { setUnlock(null); setUploadFor(null); setShowDex(true); }} />
+      )}
       {toast && <div className="toast" role="status">{toast}</div>}
     </div>
   );

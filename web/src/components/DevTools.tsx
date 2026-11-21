@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../lib/api";
 import { loadPrecomputedInference } from "../lib/data";
+import { resetDex } from "../lib/dex";
 import { Icon } from "./Icon";
 
 /** Hackathon developer tools, tucked behind a small gear (was a visible sidebar section). */
@@ -36,6 +37,7 @@ export function DevTools() {
           <p className="overline">Developer tools</p>
           <button type="button" className="btn btn--secondary btn--sm" onClick={onDemoLogin}>Demo login (Render)</button>
           <button type="button" className="btn btn--secondary btn--sm" onClick={onPrecomputedInfer}>Precomputed CV (static JSON)</button>
+          <button type="button" className="btn btn--secondary btn--sm" onClick={() => { resetDex(); window.location.reload(); }}>Reset demo Dex</button>
           {msg && <p className="caption">{msg}</p>}
         </div>
       )}

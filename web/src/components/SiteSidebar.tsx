@@ -11,6 +11,8 @@ import { FamilyCard, FamilyChip, FamilyRow } from "./Families";
 import { Icon } from "./Icon";
 import { InstructionCard } from "./InstructionCard";
 import { RodDeploymentCard } from "./RodDeploymentCard";
+import { RodWeek } from "./RodWeek";
+import { dayName, rodWeek } from "../lib/rodDemo";
 import { SiteHeader } from "./SiteHeader";
 import { TaxonModal } from "./TaxonModal";
 import { WaterQualityPanel } from "./WaterQualityPanel";
@@ -21,6 +23,8 @@ type Props = {
   catalog: Map<string, TaxonCatalogEntry> | null;
   series: SiteSeries | undefined;
   dex: Set<string>;
+  /** MOCK: a camera rod is recording at this site (see lib/rodDemo.ts) */
+  rodActive?: boolean;
   onClose: () => void;
   onUpload: () => void;
   onToast: (msg: string) => void;
@@ -33,7 +37,7 @@ type Props = {
  *   fresh       sampled within 2 years
  * Overdue sites lead with the task; history comes second.
  */
-export function SiteSidebar({ site, profile, catalog, series, dex, onClose, onUpload, onToast }: Props) {
+export function SiteSidebar({ site, profile, catalog, series, dex, rodActive = false, onClose, onUpload, onToast }: Props) {
   const [families, setFamilies] = useState<SiteFamilyCard[] | null>(null);
   const [open, setOpen] = useState<SiteFamilyCard | null>(null);
   const [showAll, setShowAll] = useState(false);
@@ -48,9 +52,10 @@ export function SiteSidebar({ site, profile, catalog, series, dex, onClose, onUp
     return () => { cancelled = true; };
   }, [site.site_id]);
 
-  const status = statusOf(site.staleness);
+  const status = statusOf(site.staleness, rodActive);
   const overdue = status === "stale" || status === "aging";
-  const variant = overdue ? (profile === "rod" ? "stale-rod" : "stale-kick") : "fresh";
+  const variant = rodActive ? "rod" : overdue ? (profile === "rod" ? "stale-rod" : "stale-kick") : "fresh";
+  const week = useMemo(() => (rodActive ? rodWeek() : null), [rodActive]);
   const name = formatSiteName(site.site_name);
   const s = series?.s ?? [];
   const lastYear = site.last_sample_date ? new Date(site.last_sample_date).getFullYear() : null;
@@ -58,7 +63,9 @@ export function SiteSidebar({ site, profile, catalog, series, dex, onClose, onUp
   const latest = s[s.length - 1];
   const name_ = (f: string) => commonName(f, catalog);
 
-  const tiles: [string, string][] = overdue
+  const tiles: [string, string][] = week
+    ? [[String(week.bursts.length), "bursts so far"], [String(week.families.reduce((n, f) => n + f.total, 0)), "animals counted"], [String(week.families.length), "families this week"]]
+    : overdue
     ? [[String(site.n_surveys), "visits on record"], [yearRange, "survey years"], [site.n_families != null ? String(site.n_families) : "—", "families last time"]]
     : [[String(site.n_surveys), "visits on record"], [site.n_taxa != null ? String(site.n_taxa) : "—", `${site.n_taxa === 1 ? "taxon" : "taxa"} in ${lastYear ?? "—"}`],
        [site.pct_ept_abundance != null ? `${Math.round(site.pct_ept_abundance)}%` : "—", `EPT in ${lastYear ?? "—"}`]];
@@ -124,7 +131,10 @@ export function SiteSidebar({ site, profile, catalog, series, dex, onClose, onUp
     <aside className="sidebar" aria-label="Site details" data-variant={variant}>
       <div className="sidebar__scroll">
         <SiteHeader name={name} rawName={site.site_name} siteId={site.site_id} catchment={site.catchment} status={status}
-          daysSince={site.days_since_sample} lastDate={site.last_sample_date} tiles={tiles} onClose={onClose} />
+          daysSince={site.days_since_sample} lastDate={site.last_sample_date} tiles={tiles} onClose={onClose}
+          ageText={week ? `day ${week.day} of 7` : undefined} lastLabel={week ? "Last kick sample" : undefined} />
+
+        {week && <RodWeek week={week} lastSurveyFamilies={site.families_latest} lastYear={lastYear} common={name_} />}
 
         {variant === "stale-kick" && <InstructionCard lastYear={lastYear} onPlayVideo={() => onToast("The kick-sampling video is coming soon")} />}
         {variant === "stale-rod" && <RodDeploymentCard lastYear={lastYear} />}
@@ -161,8 +171,8 @@ export function SiteSidebar({ site, profile, catalog, series, dex, onClose, onUp
         </button>
         {historyOpen && (
           <>
-            {overdue && seriesCard}
-            {overdue && <WaterQualityPanel chem={series?.chem ?? null} chemLast={series?.chem_last ?? null} />}
+            {(overdue || variant === "rod") && seriesCard}
+            {(overdue || variant === "rod") && <WaterQualityPanel chem={series?.chem ?? null} chemLast={series?.chem_last ?? null} />}
             {families && families.length > 0 && (
               <section className="card card--tight">
                 <div className="stack-4"><h2 className="h-display-s">Every family recorded here</h2><p className="caption">Tap a family for its year-by-year record.</p></div>
@@ -187,6 +197,7 @@ export function SiteSidebar({ site, profile, catalog, series, dex, onClose, onUp
           </>
         )}
         {variant === "fresh" && <button type="button" className="btn btn--secondary btn--lg btn--full" onClick={onUpload}><Icon name="camera" size={18} />Add a new sample here</button>}
+        {variant === "rod" && week && <button type="button" className="btn btn--secondary btn--lg btn--full" onClick={() => onToast(`Collection reminder set for ${dayName(week.collect)}`)}><Icon name="calendar" size={18} />Collect the rod on {dayName(week.collect)}</button>}
       </div>
 
       {open && (

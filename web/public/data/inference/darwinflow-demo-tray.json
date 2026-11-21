@@ -1,0 +1,100 @@
+{
+ "image_key": "darwinflow-demo-tray",
+ "image_sha256": "28dc6be33fbb1d134da51fdcf4f86f87b0864b61564653dc7a78a803214116b1",
+ "image_width": 1760,
+ "image_height": 1200,
+ "model": "precomputed (demo tray)",
+ "bbox_format": "xyxy_pixels",
+ "detections": [
+  {
+   "family": "Baetidae",
+   "confidence": 0.92,
+   "bbox": [
+    324,
+    248,
+    564,
+    534
+   ]
+  },
+  {
+   "family": "Baetidae",
+   "confidence": 0.88,
+   "bbox": [
+    1102,
+    210,
+    1362,
+    414
+   ]
+  },
+  {
+   "family": "Baetidae",
+   "confidence": 0.81,
+   "bbox": [
+    1326,
+    754,
+    1524,
+    990
+   ]
+  },
+  {
+   "family": "Heptageniidae",
+   "confidence": 0.86,
+   "bbox": [
+    724,
+    460,
+    974,
+    802
+   ]
+  },
+  {
+   "family": "Gammaridae",
+   "confidence": 0.95,
+   "bbox": [
+    236,
+    792,
+    494,
+    992
+   ]
+  },
+  {
+   "family": "Gammaridae",
+   "confidence": 0.9,
+   "bbox": [
+    1396,
+    446,
+    1610,
+    682
+   ]
+  },
+  {
+   "family": "Chironomidae",
+   "confidence": 0.77,
+   "bbox": [
+    1014,
+    840,
+    1260,
+    1038
+   ]
+  },
+  {
+   "family": "Hydropsychidae",
+   "confidence": 0.84,
+   "bbox": [
+    596,
+    902,
+    812,
+    1042
+   ]
+  },
+  {
+   "family": "Elmidae",
+   "confidence": 0.64,
+   "bbox": [
+    858,
+    144,
+    1014,
+    326
+   ]
+  }
+ ]
+}

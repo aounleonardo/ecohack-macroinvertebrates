@@ -23,3 +23,12 @@ export function saveDex(dex: Set<string>) {
     /* ignore */
   }
 }
+
+/** Back to the demo seed (dev tools), so the unlock moment can be shown again. */
+export function resetDex() {
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    /* ignore */
+  }
+}
