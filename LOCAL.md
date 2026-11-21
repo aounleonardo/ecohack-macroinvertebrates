@@ -45,8 +45,11 @@ MODAL_TOKEN_SECRET=...
 ```
 
 ```bash
+pip install -r requirements.txt   # includes `modal` — re-run after git pull
 uvicorn app.main:app --reload --port 8000
 ```
+
+`backend/.env` must include **`MODAL_TOKEN_ID`** and **`MODAL_TOKEN_SECRET`** (same as root `.env`), and you need **`modal deploy modal/insecta.py`** once. If `modal` is missing from the venv you get **502** with `No module named 'modal'`. Without tokens or deploy, you get a different 502 from Modal.
 
 **Terminal 2 — Web (Vite proxy, not production API)**
 

@@ -151,6 +151,13 @@ async def infer_tray_photo(file: UploadFile = File(...), site_id: str = Form("")
 
             model = modal.Cls.from_name(MODAL_APP, MODAL_CLASS)()
             out = await model.infer.remote.aio(data, "kick_tray")
+        except ModuleNotFoundError as e:
+            if e.name == "modal":
+                raise HTTPException(
+                    status_code=502,
+                    detail="Modal Python package not installed in this API venv — run: pip install -r requirements.txt",
+                ) from e
+            raise
         except Exception as e:  # noqa: BLE001 - surface the reason to the UI
             raise HTTPException(status_code=502, detail=f"Modal inference failed: {e}") from e
         dets = _normalise_boxes(out.get("detections") or [], size, xywh=True, max_side=MODAL_MAX_SIDE)
