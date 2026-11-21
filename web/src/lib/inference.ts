@@ -87,21 +87,42 @@ async function tryPrecomputed(file: File): Promise<InferenceResult | null> {
   return null;
 }
 
+const INFER_TIMEOUT_MS = 180_000;
+
 async function postImage(url: string, file: File, siteId: string, auth = false): Promise<unknown> {
   const body = new FormData();
   body.append("file", file, file.name);
   body.append("site_id", siteId);
   const token = auth ? sessionStorage.getItem("demo_token") : null;
-  const res = await fetch(url, { method: "POST", body, headers: token ? { Authorization: `Bearer ${token}` } : undefined });
-  if (!res.ok) throw new Error(`${res.status} ${await res.text().catch(() => "")}`.trim());
-  return res.json();
+  const res = await fetch(url, {
+    method: "POST",
+    body,
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    signal: AbortSignal.timeout(INFER_TIMEOUT_MS),
+  });
+  const text = await res.text().catch(() => "");
+  if (!res.ok) {
+    throw new Error(
+      text.trim() || `${res.status} — is VITE_API_URL set on Netlify, or /api proxied to Render?`,
+    );
+  }
+  const ct = res.headers.get("content-type") ?? "";
+  if (!ct.includes("json")) {
+    throw new Error("Detection API returned non-JSON (often means /api hit the static site, not Render).");
+  }
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error("Could not parse detection API response.");
+  }
 }
 
 export async function detectFamilies(file: File, siteId: string): Promise<InferenceResult> {
   const pre = await tryPrecomputed(file);
   if (pre) return pre;
   if (INFER_URL) return normalise(await postImage(INFER_URL, file, siteId), "gpu");
-  return normalise(await postImage(API_BASE ? `${API_BASE}/api/inference` : "/api/inference", file, siteId, true), "api");
+  const inferUrl = API_BASE ? `${API_BASE}/api/inference` : "/api/inference";
+  return normalise(await postImage(inferUrl, file, siteId, false), "api");
 }
 
 /** Bundled demo tray (works offline): a fixture with matching precomputed boxes. */
