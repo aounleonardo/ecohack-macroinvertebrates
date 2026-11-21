@@ -6,6 +6,7 @@ import { UploadFlow } from "./components/UploadFlow";
 import { UnlockModal } from "./components/UnlockModal";
 import { CoordinatorPanel } from "./components/CoordinatorPanel";
 import { ROD_DEMO_SITE } from "./lib/rodDemo";
+import type { CvShortcut } from "./components/DevTools";
 import { MapView } from "./map/MapView";
 import { loadSitesGeoJSON, parseSiteProperties, type SitesFeatureCollection } from "./lib/data";
 import { DEX_FAMILIES, commonName, isDexFamily } from "./lib/families";
@@ -19,6 +20,10 @@ type Lines = GeoJSON.FeatureCollection<GeoJSON.LineString, Record<string, unknow
 
 /** Default fresh-site demo: Gelli Deg (?site=Kef508440). Gowerton (K2547a726) is stale (2013). */
 const DEMO_SITE = "Kef508440";
+/** Red site used by the computer-vision shortcuts when nothing is selected: Cwmpennar (upstream), 2013. */
+const CV_DEMO_SITE = "K7b34c0ca";
+
+type CvOpen = { siteId: string; mode: "volunteer" | "review"; autoDemo?: boolean; who?: string };
 
 async function loadLines(path: string, hint: string): Promise<Lines> {
   const res = await fetch(path);
@@ -43,8 +48,8 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [focusNonce, setFocusNonce] = useState(0);
   const [dex, setDex] = useState(loadDex);
-  const [uploadFor, setUploadFor] = useState<string | null>(null);
-  const [unlock, setUnlock] = useState<string[] | null>(null);
+  const [cv, setCv] = useState<CvOpen | null>(null);
+  const [unlock, setUnlock] = useState<{ families: string[]; siteName: string } | null>(null);
   const [showDex, setShowDex] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const dexCount = DEX_FAMILIES.filter((f) => dex.has(f)).length;
@@ -89,9 +94,37 @@ export default function App() {
   const site = feature ? parseSiteProperties(feature.properties as unknown as Record<string, unknown>) : null;
 
   const common = (f: string) => commonName(f, catalog);
+  const siteNameOf = (id: string) => formatSiteName(String(byId.get(id)?.properties.site_name ?? id));
+
+  /** Open any computer-vision screen: gear menu, ?cv= deep link, coordinator review. */
+  const openCv = useCallback((k: CvShortcut, siteId?: string, who = "Rhys") => {
+    if (!data) return;
+    const id = siteId ?? ((k !== "review" && selectedId) || CV_DEMO_SITE);
+    setShowDex(false);
+    if (k === "review") return setCv({ siteId: id, mode: "review", autoDemo: true, who });
+    const f = byId.get(id);
+    if (f && profile !== "coordinator") { setSelectedId(id); setCatchment(f.properties.catchment); }
+    if (k === "upload") setCv({ siteId: id, mode: "volunteer" });
+    if (k === "result") setCv({ siteId: id, mode: "volunteer", autoDemo: true });
+    if (k === "unlock") {
+      const pick = ["Heptageniidae", ...DEX_FAMILIES].find((x) => !dex.has(x)) ?? "Heptageniidae";
+      setUnlock({ families: [pick], siteName: siteNameOf(id) });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, byId, selectedId, profile, dex]);
+
+  // ?cv=upload|result|unlock|review (with optional &site=<id>), once data is in
+  useEffect(() => {
+    const k = new URLSearchParams(window.location.search).get("cv") as CvShortcut | null;
+    if (data && k && ["upload", "result", "unlock", "review"].includes(k)) {
+      openCv(k, new URLSearchParams(window.location.search).get("site") ?? CV_DEMO_SITE);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const changeProfile = (p: Profile) => {
     setProfile(p);
+    setCv(null);
     if (p === "coordinator") setSelectedId(null); // coordinators land on the overview
   };
 
@@ -100,10 +133,11 @@ export default function App() {
     const next = new Set([...dex, ...families.filter(isDexFamily)]);
     setDex(next);
     saveDex(next);
-    if (site?.staleness === "stale") setToast("Badge earned: Sampled a red site");
-    if (fresh.length) setUnlock(fresh);
+    const cvSite = cv ? byId.get(cv.siteId)?.properties : undefined;
+    if (cvSite?.staleness === "stale") setToast("Badge earned: Sampled a red site");
+    if (fresh.length) setUnlock({ families: fresh, siteName: siteNameOf(cv?.siteId ?? "") });
     else {
-      setUploadFor(null);
+      setCv(null);
       setToast("Saved. No new Dex families this time.");
     }
   };
@@ -146,7 +180,7 @@ export default function App() {
                 catchment={catchment} selectedId={selectedId}
                 selectedStatus={site ? statusOf(site.staleness, site.site_id === ROD_DEMO_SITE) : null}
                 selectedName={site ? formatSiteName(site.site_name) : null}
-                focusNonce={focusNonce} onSelect={setSelectedId}
+                focusNonce={focusNonce} onSelect={setSelectedId} onOpenCv={(k) => openCv(k)}
               />
             ) : (
               <section className="map map--loading" aria-busy="true"><p className="caption">{error ?? "Loading Welsh rivers…"}</p></section>
@@ -156,11 +190,12 @@ export default function App() {
                 key={site.site_id} site={site} profile={profile} catalog={catalog} series={series[site.site_id]} dex={dex}
                 rodActive={site.site_id === ROD_DEMO_SITE}
                 onClose={() => setSelectedId(null)}
-                onUpload={() => setUploadFor(site.site_id)}
+                onUpload={() => setCv({ siteId: site.site_id, mode: "volunteer" })}
                 onToast={setToast}
               />
             ) : profile === "coordinator" && data ? (
               <CoordinatorPanel sites={data.sites} catchment={catchment} onToast={setToast}
+                onReview={(id, who) => openCv("review", id, who)}
                 onSelect={(id) => { setSelectedId(id); setFocusNonce((n) => n + 1); }} />
             ) : (
               <aside className="sidebar sidebar--empty">
@@ -169,17 +204,21 @@ export default function App() {
                 <button type="button" className="btn btn--primary" onClick={assignRed}>Assign me a red site</button>
               </aside>
             )}
-            {uploadFor && site && (
-              <UploadFlow siteId={site.site_id} siteName={formatSiteName(site.site_name)} dex={dex} common={common}
-                onClose={() => setUploadFor(null)} onAddToDex={addToDex} />
+            {cv && byId.has(cv.siteId) && (
+              <UploadFlow key={`${cv.mode}-${cv.siteId}-${cv.autoDemo ? "demo" : "pick"}`}
+                siteId={cv.siteId} siteName={siteNameOf(cv.siteId)} dex={dex} common={common}
+                autoDemo={cv.autoDemo} mode={cv.mode} who={cv.who}
+                onClose={() => setCv(null)} onAddToDex={addToDex}
+                onConfirm={() => { setToast(`IDs confirmed for ${cv.who ?? "the volunteer"}’s upload at ${siteNameOf(cv.siteId)}`); setCv(null); }} />
             )}
           </>
         )}
       </main>
-      {unlock && site && (
-        <UnlockModal families={unlock} siteName={formatSiteName(site.site_name)} catalog={catalog} common={common} dexCount={dexCount}
-          onClose={() => { setUnlock(null); setUploadFor(null); }}
-          onViewDex={() => { setUnlock(null); setUploadFor(null); setShowDex(true); }} />
+      {unlock && (
+        <UnlockModal families={unlock.families} siteName={unlock.siteName} catalog={catalog} common={common}
+          dexCount={Math.max(dexCount, DEX_FAMILIES.filter((f) => dex.has(f) || unlock.families.includes(f)).length)}
+          onClose={() => { setUnlock(null); setCv(null); }}
+          onViewDex={() => { setUnlock(null); setCv(null); setShowDex(true); }} />
       )}
       {toast && <div className="toast" role="status">{toast}</div>}
     </div>

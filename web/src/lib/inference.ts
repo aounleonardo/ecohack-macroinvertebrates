@@ -110,6 +110,27 @@ export async function demoTrayFile(): Promise<File> {
   return new File([blob], "darwinflow-demo-tray.jpg", { type: "image/jpeg" });
 }
 
+export const LOW_CONFIDENCE = 0.7;
+
+/** The family was inferred (order hint, morphology or kick-sample guess), not matched exactly. */
+function inferredMatch(kind?: string) {
+  return !!kind && kind !== "exact" && kind !== "confirmed";
+}
+
+/** Shown dashed with a Yes/No check, and kept out of the Dex until someone says Yes. */
+export function isTentative(d: { confidence: number; pilot_suggestion?: boolean; match_kind?: string }) {
+  return d.confidence < LOW_CONFIDENCE || !!d.pilot_suggestion || inferredMatch(d.match_kind);
+}
+
+/** A person said Yes to this family: it counts as identified from here on. */
+export function confirmFamily(result: InferenceResult, family: string): InferenceResult {
+  return {
+    ...result,
+    detections: result.detections.map((d) =>
+      d.family === family ? { ...d, confidence: Math.max(d.confidence, LOW_CONFIDENCE), pilot_suggestion: false, match_kind: "confirmed" } : d),
+  };
+}
+
 /** Group detections by family: count, mean confidence. */
 export function byFamily(dets: Detection[]) {
   const m = new Map<
@@ -124,7 +145,7 @@ export function byFamily(dets: Detection[]) {
     if (d.bbox) e.boxes += 1;
     if (d.hint && !e.hint) e.hint = d.hint;
     if (d.match_kind && !e.match_kind) e.match_kind = d.match_kind;
-    if (d.pilot_suggestion || (d.match_kind && d.match_kind !== "exact")) e.pilot = true;
+    if (d.pilot_suggestion || inferredMatch(d.match_kind)) e.pilot = true;
     m.set(d.family, e);
   }
   return [...m.values()].map((e) => ({

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { byFamily, demoTrayFile, detectFamilies, type InferenceResult } from "../lib/inference";
+import { byFamily, confirmFamily, demoTrayFile, detectFamilies, isTentative, type InferenceResult } from "../lib/inference";
 import { isDexFamily } from "../lib/families";
 import { FamilyArt } from "./atoms";
 import { DetectionOverlay } from "./DetectionOverlay";
@@ -12,10 +12,15 @@ type Props = {
   common: (f: string) => string;
   onClose: () => void;
   onAddToDex: (families: string[]) => void;
+  /** start straight away with the bundled demo tray (shortcuts, deep links, coordinator review) */
+  autoDemo?: boolean;
+  /** "review": a coordinator checking a volunteer's upload; confirms IDs instead of adding to a Dex */
+  mode?: "volunteer" | "review";
+  who?: string;
+  onConfirm?: () => void;
 };
 
 type Step = "pick" | "working" | "result" | "error";
-const LOW = 0.7;
 
 const TIPS: [IconName, string, string][] = [
   ["camera", "Shoot from directly above", "No angle, the whole tray in frame."],
@@ -25,7 +30,8 @@ const TIPS: [IconName, string, string][] = [
 ];
 
 /** Upload tray photo → detections → results → Add to my Dex. Matches the CV screens on the canvas. */
-export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex }: Props) {
+export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex, autoDemo = false, mode = "volunteer", who, onConfirm }: Props) {
+  const review = mode === "review";
   const [step, setStep] = useState<Step>("pick");
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
@@ -38,6 +44,10 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
   const run = useRef(0);
 
   useEffect(() => () => { if (url) URL.revokeObjectURL(url); }, [url]);
+  useEffect(() => {
+    if (autoDemo) startDemo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     if (step !== "working") return;
     const t0 = Date.now();
@@ -70,19 +80,22 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
     const f = files?.[0];
     if (f && f.type.startsWith("image/")) start(f);
   };
-  const useDemo = async () => start(await demoTrayFile());
+  const startDemo = async () => start(await demoTrayFile());
   const cancel = () => { run.current++; setStep("pick"); };
 
   const fams = result ? byFamily(result.detections).filter((f) => !rejected.has(f.family)).sort((a, b) => Number(isNew(b.family)) - Number(isNew(a.family)) || b.count - a.count) : [];
-  function isNew(f: string) { return isDexFamily(f) && !dex.has(f); }
-  const newOnes = fams.filter((f) => isNew(f.family) && f.confidence >= LOW).map((f) => f.family);
+  function isNew(f: string) { return !review && isDexFamily(f) && !dex.has(f); }
+  const newOnes = fams.filter((f) => isNew(f.family) && !isTentative(f)).map((f) => f.family);
   const animals = fams.reduce((n, f) => n + f.count, 0);
   const stepNo = step === "pick" || step === "error" ? 2 : step === "working" ? 2 : 3;
 
   return (
     <div className="upload-flow" role="region" aria-label="Upload tray photo">
       <div className="flow-bar">
-        <button type="button" className="btn btn--ghost btn--sm flow-back" onClick={onClose}><span style={{ transform: "rotate(180deg)", display: "flex" }}><Icon name="chev-right" size={18} /></span>{siteName}</button>
+        <button type="button" className="btn btn--ghost btn--sm flow-back" onClick={onClose}><span style={{ transform: "rotate(180deg)", display: "flex" }}><Icon name="chev-right" size={18} /></span>{review ? "Coordinator overview" : siteName}</button>
+        {review ? (
+          <span className="chip chip--river"><Icon name="clipboard" size={15} />Reviewing {who ?? "a volunteer"}’s upload · {siteName}</span>
+        ) : (
         <ol className="stepper" aria-label="Progress">
           {["Sample", "Upload photo", "Check results", "Add to Dex"].map((s, i) => (
             <li key={s} className={i + 1 < stepNo ? "done" : i + 1 === stepNo ? "current" : ""} aria-current={i + 1 === stepNo ? "step" : undefined}>
@@ -90,6 +103,7 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
             </li>
           ))}
         </ol>
+        )}
         <span className="caption">Kick sample · {new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</span>
       </div>
 
@@ -108,7 +122,7 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
             <p className="body-2" style={{ maxWidth: 440 }}>We’ll find each animal, suggest its family and count them. You check the result before anything is saved.</p>
             <div className="dropzone__actions">
               <button type="button" className="btn btn--primary btn--lg" onClick={() => input.current?.click()}><Icon name="camera" size={18} />Choose photo</button>
-              <button type="button" className="btn btn--secondary btn--lg" onClick={useDemo}>Use the demo tray</button>
+              <button type="button" className="btn btn--secondary btn--lg" onClick={startDemo}>Use the demo tray</button>
             </div>
             <p className="caption">JPG, PNG or HEIC · one tray per photo</p>
           </section>
@@ -150,7 +164,7 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
                 <div className="stack-8">
                   <button type="button" className="btn btn--primary" onClick={() => file && start(file)}>Try again</button>
                   <button type="button" className="btn btn--secondary" onClick={() => input.current?.click()}>Choose another photo</button>
-                  <button type="button" className="btn btn--ghost btn--sm" onClick={useDemo}>Use the demo tray</button>
+                  <button type="button" className="btn btn--ghost btn--sm" onClick={startDemo}>Use the demo tray</button>
                 </div>
               </>
             )}
@@ -165,30 +179,29 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
             <div className="det-legend">
               <span><i className="det-key" />Identified</span>
               <span><i className="det-key det-key--new" />New to your Dex</span>
-              <span><i className="det-key det-key--low" />Low confidence, please check</span>
+              <span><i className="det-key det-key--low" />Uncertain, please check</span>
               {!result.detections.some((d) => d.bbox) && <span>This model returns families without positions.</span>}
             </div>
           </div>
           <section className="card results" aria-label="Families found">
             <div className="stack-4">
               <h1 className="h-display-m">{fams.length ? `${fams.length} famil${fams.length === 1 ? "y" : "ies"}, ${animals} animal${animals === 1 ? "" : "s"}` : "No invertebrates found"}</h1>
-              <p className="caption">{siteName} · {result.source === "precomputed" ? "precomputed demo result" : result.model ?? "identification service"}</p>
+              <p className="caption">{review ? `${who ?? "Volunteer"} · ` : ""}{siteName} · {result.source === "precomputed" ? "precomputed demo result" : result.model ?? "identification service"}</p>
             </div>
             {fams.length === 0 && <p className="body-2">Try a sharper photo from directly above, with the animals spread out.</p>}
             <ul className="result-rows">
               {fams.map((f) => {
-                const fresh = isNew(f.family);
-                const low = f.confidence < LOW || f.pilot_suggestion;
+                const low = isTentative(f), fresh = isNew(f.family) && !low;
                 return (
-                  <li key={f.family} className={fresh && !low ? "result-row result-row--new" : "result-row"}>
+                  <li key={f.family} className={fresh ? "result-row result-row--new" : "result-row"}>
                     <FamilyArt family={f.family} size={44} label={common(f.family)} />
                     <span className="names">
-                      <span className="names__common">{common(f.family)}{fresh && !low && <span className="tag-new"><Icon name="sparkle" size={11} strokeWidth={2} />NEW</span>}</span>
+                      <span className="names__common">{common(f.family)}{fresh && <span className="tag-new"><Icon name="sparkle" size={11} strokeWidth={2} />NEW</span>}</span>
                       <span className="names__latin">{f.family}</span>
-                      {f.hint && <span className="caption" style={{ maxWidth: 280 }}>{f.hint}</span>}
+                      {f.hint && low && <span className="names__hint">Model saw: {f.hint}</span>}
                       {low && (
                         <span className="confirm">Is this right?
-                          <button type="button" className="btn btn--secondary btn--xs" onClick={() => setResult({ ...result, detections: result.detections.map((d) => (d.family === f.family ? { ...d, confidence: Math.max(d.confidence, LOW) } : d)) })}>Yes</button>
+                          <button type="button" className="btn btn--secondary btn--xs" onClick={() => setResult(confirmFamily(result, f.family))}>Yes</button>
                           <button type="button" className="btn btn--secondary btn--xs" onClick={() => setRejected(new Set([...rejected, f.family]))}>No</button>
                         </span>
                       )}
@@ -201,13 +214,19 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex 
                 );
               })}
             </ul>
-            <p className="note"><Icon name="info" size={16} /><span><strong>Pilot classifier.</strong> IDs are suggestions until a coordinator confirms them.</span></p>
+            <p className="note"><Icon name="info" size={16} /><span><strong>Pilot classifier.</strong> {review ? "Tap No on anything that looks wrong, then confirm." : "IDs are suggestions until a coordinator confirms them."}</span></p>
             <div className="stack-8" style={{ marginTop: "auto" }}>
-              <button type="button" className="btn btn--primary btn--lg btn--full" disabled={!fams.length} onClick={() => onAddToDex(fams.filter((f) => f.confidence >= LOW).map((f) => f.family))}>
-                <Icon name="dex" size={18} />Add to my Dex
-              </button>
+              {review ? (
+                <button type="button" className="btn btn--primary btn--lg btn--full" disabled={!fams.length} onClick={onConfirm}>
+                  <Icon name="check" size={18} strokeWidth={2.4} />Confirm IDs
+                </button>
+              ) : (
+                <button type="button" className="btn btn--primary btn--lg btn--full" disabled={!fams.length} onClick={() => onAddToDex(fams.filter((f) => !isTentative(f)).map((f) => f.family))}>
+                  <Icon name="dex" size={18} />Add to my Dex
+                </button>
+              )}
               {newOnes.length > 0 && <p className="caption center" style={{ color: "var(--moss-700)", fontWeight: 600 }}>{newOnes.length} new famil{newOnes.length === 1 ? "y" : "ies"}: {newOnes.map(common).join(", ")}</p>}
-              <button type="button" className="btn btn--ghost btn--sm" onClick={() => setStep("pick")}>Upload another photo</button>
+              {!review && <button type="button" className="btn btn--ghost btn--sm" onClick={() => setStep("pick")}>Upload another photo</button>}
             </div>
           </section>
         </div>

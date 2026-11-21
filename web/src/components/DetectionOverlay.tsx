@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { InferenceResult } from "../lib/inference";
+import { isTentative, type InferenceResult } from "../lib/inference";
 import { Icon } from "./Icon";
 
 type Props = {
@@ -10,8 +10,6 @@ type Props = {
   common: (family: string) => string;
   hidden: Set<string>;
 };
-
-const LOW = 0.7;
 
 /** Tray photo with a rounded box and label chip per detection. Boxes are placed in % of the image,
  *  so they track the rendered size. bbox: [x1, y1, x2, y2] in image pixels, or 0–1 normalised. */
@@ -29,8 +27,8 @@ export function DetectionOverlay({ src, alt, result, isNew, common, hidden }: Pr
         const norm = Math.max(x1, y1, x2, y2) <= 1.0001;
         const l = (norm ? x1 : x1 / W) * 100, t = (norm ? y1 : y1 / H) * 100;
         const w = ((norm ? x2 - x1 : (x2 - x1) / W) * 100), h = ((norm ? y2 - y1 : (y2 - y1) / H) * 100);
-        const fresh = isNew(d.family);
-        const low = d.confidence < LOW;
+        const low = isTentative(d);
+        const fresh = isNew(d.family) && !low;
         const cls = `det-box${fresh ? " det-box--new" : ""}${low ? " det-box--low" : ""}`;
         const chipBelow = t < 7;
         const chipRight = l > 62;

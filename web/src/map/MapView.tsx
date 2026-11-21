@@ -8,7 +8,7 @@ import {
 import type { SitesFeatureCollection } from "../lib/data";
 import type { Status } from "../lib/staleness";
 import { MapLegend } from "../components/MapLegend";
-import { DevTools } from "../components/DevTools";
+import { DevTools, type CvShortcut } from "../components/DevTools";
 import { Icon } from "../components/Icon";
 
 type Lines = GeoJSON.FeatureCollection<GeoJSON.LineString, Record<string, unknown>>;
@@ -24,6 +24,8 @@ type Props = {
   /** bump to fly to the selected site (assign / deep link); clicks don't move the map */
   focusNonce: number;
   onSelect: (siteId: string) => void;
+  /** opens a computer-vision demo screen (gear menu shortcuts) */
+  onOpenCv?: (k: CvShortcut) => void;
 };
 
 /** Default view: Cynon valley demo corridor */
@@ -37,7 +39,7 @@ function boundsOf(sites: SitesFeatureCollection, catchment: string): LngLatBound
   return [[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]];
 }
 
-export function MapView({ background, reaches, sites, catchment, selectedId, selectedStatus, selectedName, focusNonce, onSelect }: Props) {
+export function MapView({ background, reaches, sites, catchment, selectedId, selectedStatus, selectedName, focusNonce, onSelect, onOpenCv }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MlMap | null>(null);
   const [ready, setReady] = useState(false);
@@ -152,7 +154,7 @@ export function MapView({ background, reaches, sites, catchment, selectedId, sel
             <Icon name="locate" size={18} />
           </button>
         </div>
-        <DevTools />
+        <DevTools onOpenCv={onOpenCv} />
       </div>
       <MapLegend />
     </section>

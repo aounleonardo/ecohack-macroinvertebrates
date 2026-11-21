@@ -12,6 +12,8 @@ type Props = {
   catchment: string;
   onSelect: (siteId: string) => void;
   onToast: (msg: string) => void;
+  /** opens the detection result for a volunteer's upload, in coordinator review mode */
+  onReview: (siteId: string, who: string) => void;
 };
 
 /* MOCK volunteer activity. Coverage numbers and priority sites are real (NRW KiEco). */
@@ -47,7 +49,7 @@ function Stack({ c, height = 14 }: { c: ReturnType<typeof coverage>; height?: nu
 }
 
 /** What a catchment coordinator sees: coverage, live rods, uploads to confirm, who's going where. */
-export function CoordinatorPanel({ sites, catchment, onSelect, onToast }: Props) {
+export function CoordinatorPanel({ sites, catchment, onSelect, onToast, onReview }: Props) {
   const [assignments, setAssignments] = useState<Assignment[]>(SEED_ASSIGNMENTS);
   const [pick, setPick] = useState<Record<string, string>>({});
   const byId = useMemo(() => new Map(sites.features.map((f) => [f.properties.site_id, f.properties])), [sites]);
@@ -126,7 +128,7 @@ export function CoordinatorPanel({ sites, catchment, onSelect, onToast }: Props)
               <li key={u.site} className="coord-item">
                 <img className="coord-item__thumb" src="/demo/darwinflow-demo-tray.jpg" alt="" />
                 <span className="names"><span className="names__common">{name(u.site)}</span><span className="caption">{u.who} · {u.ago} · {u.families} families{u.check ? ` · ${u.check} to check` : ""}</span></span>
-                <button type="button" className="btn btn--secondary btn--sm" onClick={() => onToast("The review screen is next on the build list")}>Review</button>
+                <button type="button" className="btn btn--secondary btn--sm" onClick={() => onReview(u.site, u.who)}>Review</button>
               </li>
             ))}
           </ul>

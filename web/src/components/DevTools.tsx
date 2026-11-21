@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { login } from "../lib/api";
-import { loadPrecomputedInference } from "../lib/data";
 import { resetDex } from "../lib/dex";
 import { Icon } from "./Icon";
 
-/** Hackathon developer tools, tucked behind a small gear (was a visible sidebar section). */
-export function DevTools() {
+/** Ways into the computer-vision demo, from the gear menu or a ?cv= deep link. */
+export type CvShortcut = "upload" | "result" | "unlock" | "review";
+
+export const CV_SHORTCUTS: { id: CvShortcut; label: string; hint: string }[] = [
+  { id: "upload", label: "Upload screen", hint: "?cv=upload" },
+  { id: "result", label: "Detection result", hint: "?cv=result" },
+  { id: "unlock", label: "Dex unlock moment", hint: "?cv=unlock" },
+  { id: "review", label: "Coordinator review", hint: "?cv=review" },
+];
+
+/** Hackathon tools behind a small gear: demo shortcuts, login, reset. */
+export function DevTools({ onOpenCv }: { onOpenCv?: (k: CvShortcut) => void }) {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
@@ -18,15 +27,6 @@ export function DevTools() {
     }
   }
 
-  async function onPrecomputedInfer() {
-    try {
-      const result = await loadPrecomputedInference("kick-sampling-tray-still");
-      setMsg(`${result.detections.length} families (precomputed)`);
-    } catch {
-      setMsg("Add web/public/data/inference/kick-sampling-tray-still.json");
-    }
-  }
-
   return (
     <div className="devtools">
       <button type="button" className="ctrl-single" aria-label="Developer tools" aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -34,9 +34,18 @@ export function DevTools() {
       </button>
       {open && (
         <div className="devtools__panel" role="dialog" aria-label="Developer tools">
-          <p className="overline">Developer tools</p>
+          {onOpenCv && (
+            <>
+              <p className="overline">Computer vision demo</p>
+              {CV_SHORTCUTS.map((s) => (
+                <button key={s.id} type="button" className="btn btn--secondary btn--sm devtools__cv" onClick={() => { setOpen(false); onOpenCv(s.id); }}>
+                  <span>{s.label}</span><code>{s.hint}</code>
+                </button>
+              ))}
+            </>
+          )}
+          <p className="overline" style={{ marginTop: 6 }}>Developer tools</p>
           <button type="button" className="btn btn--secondary btn--sm" onClick={onDemoLogin}>Demo login (Render)</button>
-          <button type="button" className="btn btn--secondary btn--sm" onClick={onPrecomputedInfer}>Precomputed CV (static JSON)</button>
           <button type="button" className="btn btn--secondary btn--sm" onClick={() => { resetDex(); window.location.reload(); }}>Reset demo Dex</button>
           {msg && <p className="caption">{msg}</p>}
         </div>
