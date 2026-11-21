@@ -11,6 +11,7 @@
     "prebuild": "npm run etl",
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "postbuild": "test -f dist/data/sites.geojson && test -f dist/data/river_reaches.geojson",
     "preview": "vite preview"
   },
   "dependencies": {

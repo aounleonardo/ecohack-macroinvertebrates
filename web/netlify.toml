@@ -11,13 +11,10 @@
   VITE_API_URL = "https://ecohack-macroinvertebrates.onrender.com"
 
 # Same-origin /api/* for builds that omit VITE_API_URL (proxy to Render).
+# Proxy inference only — do NOT add "/* → /index.html" here: Netlify would serve HTML
+# with 200 for missing /data/*.geojson and the map would fail JSON.parse.
 [[redirects]]
   from = "/api/*"
   to = "https://ecohack-macroinvertebrates.onrender.com/api/:splat"
   status = 200
   force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

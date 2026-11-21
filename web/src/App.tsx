@@ -27,7 +27,11 @@ type CvOpen = { siteId: string; mode: "volunteer" | "review"; autoDemo?: boolean
 
 async function loadLines(path: string, hint: string): Promise<Lines> {
   const res = await fetch(path);
-  if (!res.ok) throw new Error(`${path} missing — ${hint}`);
+  if (!res.ok) throw new Error(`${path} missing (${res.status}) — ${hint}`);
+  const ct = res.headers.get("content-type") ?? "";
+  if (!ct.includes("json") && !ct.includes("geo+json")) {
+    throw new Error(`${path} returned HTML, not JSON — check Netlify deploy includes /data (avoid SPA redirect on /data/*).`);
+  }
   return res.json() as Promise<Lines>;
 }
 

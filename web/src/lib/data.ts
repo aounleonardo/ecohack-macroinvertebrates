@@ -24,6 +24,10 @@ export type SitesFeatureCollection = GeoJSON.FeatureCollection<
 export async function loadSitesGeoJSON(): Promise<SitesFeatureCollection> {
   const res = await fetch("/data/sites.geojson");
   if (!res.ok) throw new Error(`sites.geojson ${res.status}`);
+  const ct = res.headers.get("content-type") ?? "";
+  if (!ct.includes("json") && !ct.includes("geo+json")) {
+    throw new Error("sites.geojson returned HTML — deploy missing /data or SPA redirect swallowed the file");
+  }
   return res.json() as Promise<SitesFeatureCollection>;
 }
 
