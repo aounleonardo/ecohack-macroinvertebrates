@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="90" viewBox="0 0 120 90">
+  <rect width="120" height="90" fill="#e8eef2"/>
+  <ellipse cx="60" cy="48" rx="28" ry="18" fill="#8b9cab"/>
+  <text x="60" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#57606a">Macroinvertebrate</text>
+</svg>

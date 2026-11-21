@@ -1,0 +1,242 @@
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  font-family: system-ui, sans-serif;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  height: 100%;
+}
+
+.map-wrap {
+  min-height: 0;
+}
+
+.sidebar {
+  padding: 1rem;
+  border-left: 1px solid #ddd;
+  overflow: auto;
+  background: #fafafa;
+}
+
+.staleness-fresh {
+  color: #1a7f37;
+}
+.staleness-aging {
+  color: #9a6700;
+}
+.staleness-stale {
+  color: #cf222e;
+}
+
+.error-text {
+  color: #cf222e;
+}
+
+.taxon-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.taxon-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0.65rem;
+  text-align: left;
+  padding: 0.5rem;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.taxon-card:hover {
+  border-color: #0969da;
+}
+
+.taxon-card img {
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #eee;
+}
+
+.taxon-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.78rem;
+}
+
+.taxon-sci {
+  font-style: italic;
+  color: #57606a;
+}
+
+.taxon-stat {
+  color: #424a53;
+}
+
+.taxon-trend {
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.taxon-trend-increasing {
+  color: #1a7f37;
+}
+.taxon-trend-declining {
+  color: #cf222e;
+}
+.taxon-trend-stable {
+  color: #57606a;
+}
+
+.taxon-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: 1rem;
+}
+
+.taxon-modal {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+}
+
+.taxon-modal-close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.taxon-modal-img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  background: #f0f3f6;
+  border-radius: 8px;
+}
+
+.taxon-dl {
+  font-size: 0.85rem;
+}
+.taxon-dl dt {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.taxon-dl dd {
+  margin: 0.15rem 0 0;
+}
+
+.family-timeline {
+  margin-top: 0.35rem;
+}
+
+.timeline-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  font-size: 0.72rem;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+
+.timeline-scroll {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  max-width: 100%;
+}
+
+.timeline-cell {
+  flex: 0 0 28px;
+  height: 36px;
+  border-radius: 3px;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.timeline-cell-bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  background: #f6f8fa;
+}
+
+.timeline-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  min-height: 4px;
+}
+
+.timeline-bar-flat {
+  flex: 1;
+  max-height: 28px;
+  border-radius: 2px;
+}
+
+.timeline-year {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 7px;
+  color: #24292f;
+  text-shadow: 0 0 2px #fff;
+}
+
+.timeline-empty {
+  font-size: 0.8rem;
+  color: #57606a;
+}
+
+.dev-tools {
+  margin: 0.75rem 0;
+  font-size: 0.8rem;
+}
+
+.dev-tools summary {
+  cursor: pointer;
+  color: #57606a;
+}
+
+.taxon-demo-note {
+  font-size: 0.75rem;
+  color: #57606a;
+  border-top: 1px solid #eee;
+  padding-top: 0.5rem;
+  margin-top: 0.75rem;
+}

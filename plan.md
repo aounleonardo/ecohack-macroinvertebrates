@@ -84,12 +84,34 @@ flowchart TB
 - **Lightning:** CV microservice (calls DoubleWord VLM / optional YOLO)  
 - **Modal:** only if you need a GPU job off the hot path  
 
-**Does a separate backend add value?** Yes for hackathon: (1) hide API keys (DoubleWord, Modal), (2) serve GeoJSON from ETL without baking 535 sites into the JS bundle, (3) one `/api/inference` contract for web + rod + precompute fallback. If you are time-pressed, **MVP shortcut:** static GeoJSON in `public/` + Netlify Function *only* for inference proxy — still not full FastAPI on Netlify.
+**Client-first rule (default):** Call from **React/Vite** whenever the browser can do it safely — no extra Render hop.
+
+| Call from Vite (direct `fetch`) | Via Render FastAPI only when |
+| --------------------------------- | ---------------------------- |
+| `GET /data/sites.geojson` (ETL output in `web/public/`) | Needs **secrets** (DoubleWord key if Lightning is not browser-safe) |
+| MapLibre tile URLs, static media under `/media/` | **Demo password** → session cookie |
+| **Precomputed** inference JSON keyed by image SHA (`/data/inference/*.json`) | **Uploads**, **video frame extract**, Postgres **dex** writes |
+| **Lightning `/infer`** if CORS + auth model allows browser calls (env `VITE_LIGHTNING_INFER_URL`) | Proxy path: Vite → Render → Lightning when keys must stay server-side |
+
+Render is **day 1** for auth, uploads, and dex — not as a generic pass-through for read-only KiEco data (that stays static on Netlify after `pnpm run etl` or `python scripts/etl_kieco.py`).
+
+**Dev:** Vite dev server; `VITE_API_URL=http://localhost:8000` for session/upload routes only.
 
 
 ---
 
 ## 3. Platform features → technical design
+
+### Demo / mock data (transparent to judges)
+
+| UI element | Source | Mocked? |
+| ---------- | ------ | ------- |
+| Staleness years | `days_since_sample / 365.25` from KiEco | No |
+| River reach colour (40 m segment) | `scripts/build_river_reaches.py` | Bearing from **nearby sample points** until OSM waterways file is cached (`data/osm_waterways_wales.json`) |
+| Taxon **Wales prevalence %** | % of site-surveys in joined CSV with family | No |
+| Taxon **site %** + **trend** | First vs second half of site survey history | No (heuristic) |
+| Common names, sensitivity, “world” ecology | `etl_taxa.py` templates + Wikimedia thumbs | **Partial** — not global GBIF range |
+| Families without thumb (e.g. Cottidae) | `placeholder-family.svg` | Yes |
 
 ### 3.1 Map: river segments & sampling staleness
 
@@ -478,12 +500,12 @@ Use these nine for cards, dex completion set, and CV label map:
 
 ## 12. Immediate next steps (repo)
 
-1. `scripts/etl_kieco.py` → SQLite or Postgres for local dev
-2. Scaffold Vite app with MapLibre + static GeoJSON from ETL
-3. `public/media` symlink or copy `data/media/images/thumbs`
-4. `inference/demo_tray.json` for CV mock
-5. Hardware: order Tier A parts list for teammate (ESP32-CAM + pump + diffuser)
-6. Move rod artwork to `docs/rod-cross-section.png` once frozen (keep filename stable in slides)
+1. ~~`scripts/etl_kieco.py`~~ → `web/public/data/sites.geojson` (**in repo**)
+2. ~~Scaffold~~ → `web/` (Vite) + `backend/` (FastAPI on Render)
+3. Symlink or copy `data/media/images/thumbs` → `web/public/media/`
+4. `web/public/data/inference/*.json` for precomputed CV (Vite reads directly)
+5. Render: deploy `backend/`; set `DEMO_PASSWORD`, `CORS_ORIGINS` (Netlify URL)
+6. Netlify: deploy `web/`; set `VITE_API_URL`, optional `VITE_LIGHTNING_INFER_URL`
 
 ---
 

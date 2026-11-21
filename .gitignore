@@ -1,1 +1,10 @@
 data/
+!data/kieco_chemistry_joined.csv
+web/node_modules/
+backend/.venv/
+__pycache__/
+.env
+.env.*
+!.env.example
+web/dist/
+web/public/data/wales_rivers_background.geojson

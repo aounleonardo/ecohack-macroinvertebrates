@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Leeches (Hirudinea) silhouette"><title>Leeches (Hirudinea) silhouette</title><defs>
+<filter id="wash" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="warp"/>
+<feDisplacementMap in="SourceGraphic" in2="warp" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1" seed="3" result="grain"/>
+<feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.75 1.22" result="ga"/>
+<feComposite in="shape" in2="ga" operator="in"/>
+</filter>
+<filter id="sil" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="warp"/>
+<feDisplacementMap in="SourceGraphic" in2="warp" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5" result="blot"/>
+<feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.25" result="ba"/>
+<feComposite in="shape" in2="ba" operator="in"/>
+</filter>
+<filter id="ink" x="-10%" y="-10%" width="120%" height="120%">
+<feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="1" seed="11" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+</defs><g filter="url(#sil)"><g fill="#4F6E70" transform="rotate(6 120 120)"><path d="M109.8,20.8 C110.2,20.5 111.2,20.2 111.9,20.1 C112.6,20.1 113.6,20.2 114,20.6 C114.5,20.9 114.4,21.4 114.8,22.1 C115.2,22.8 115.8,23.7 116.3,24.7 C116.7,25.8 117.2,26.9 117.7,28.3 C118.3,29.7 118.9,31.3 119.6,33.1 C120.3,34.9 121.2,36.9 122.1,39 C122.9,41.2 123.7,43.6 124.6,46 C125.6,48.4 126.7,50.9 127.8,53.4 C128.9,56 129.8,58.6 131.1,61.4 C132.4,64.2 134,67.2 135.5,70.5 C136.9,73.8 138.7,77.5 139.9,81.1 C141.1,84.7 141.9,88.4 142.9,92.1 C143.8,95.9 144.9,99.7 145.6,103.7 C146.3,107.7 146.8,111.9 147.1,116 C147.3,120.2 147.5,124.5 147.3,128.7 C147.1,133 146.5,137.4 145.9,141.6 C145.2,145.9 144.5,150.2 143.5,154.2 C142.5,158.3 141.2,162.4 139.8,165.9 C138.3,169.5 136.3,172.9 134.9,175.7 C133.5,178.6 132.5,180.6 131.3,183 C130.1,185.3 128.7,187.8 127.5,189.9 C126.4,192.1 125.3,194.4 124.3,196.1 C123.3,197.8 122.2,199.4 121.5,200.4 C120.7,201.4 120.3,201.7 119.8,202.2 C119.4,202.7 119.3,202.8 118.9,203.2 C118.6,203.7 118.4,204.1 117.9,205.1 C117.4,206 117.2,208 116,209 C114.7,209.9 112.3,210.8 110.5,210.9 C108.6,211.1 106.2,210.7 104.7,210 C103.2,209.4 102.3,207.8 101.7,207 C101.1,206.2 101.3,206.4 100.9,205.4 C100.5,204.5 99.8,203 99.3,201.4 C98.8,199.8 98.3,197.9 98.2,195.8 C98,193.8 98,191.3 98.3,188.9 C98.5,186.6 99.3,184.2 99.7,181.5 C100.1,178.7 100.1,175.7 100.7,172.6 C101.4,169.5 102.6,165.9 103.5,162.9 C104.5,159.9 105.8,157.3 106.7,154.4 C107.5,151.5 107.8,148.7 108.4,145.6 C109,142.6 109.5,139.5 110.1,136.2 C110.8,132.9 111.7,129.1 112.2,125.7 C112.7,122.4 112.8,119.3 113,116.1 C113.3,113 113.7,110.1 113.6,106.9 C113.6,103.7 113,100.1 112.8,96.7 C112.5,93.4 112.3,89.9 112.1,86.7 C111.9,83.5 111.8,80.8 111.4,77.7 C111.1,74.6 110.4,71.4 109.9,68.3 C109.3,65.1 108.7,61.8 108.2,58.8 C107.8,55.7 107.5,52.9 107.2,50 C106.9,47.2 106.7,44.3 106.6,41.7 C106.4,39.2 106.3,36.8 106.4,34.8 C106.5,32.7 106.9,31.1 107.2,29.4 C107.5,27.8 108.1,26 108.4,24.7 C108.8,23.4 109.1,22.5 109.3,21.8 C109.6,21.2 109.4,21.1 109.8,20.8 Z"/><ellipse cx="110" cy="211" rx="13" ry="10" transform="rotate(0 110 211)"/></g></g></svg>
