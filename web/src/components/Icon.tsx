@@ -26,6 +26,7 @@ const P: Record<string, string> = {
   'arrow-up': '<path d="M12 19V5M6 11l6-6 6 6"/>',
   'arrow-right': '<path d="M5 12h14M13 6l6 6-6 6"/>',
   'arrow-down': '<path d="M12 5v14M6 13l6 6 6-6"/>',
+  'arrow-left': '<path d="M19 12H5M11 6l-6 6 6 6"/>',
   sparkle: '<path d="M12 3c.6 4.5 2.5 6.4 7 7-4.5.6-6.4 2.5-7 7-.6-4.5-2.5-6.4-7-7 4.5-.6 6.4-2.5 7-7z"/>',
   gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>',
   dex: '<rect x="4" y="3.5" width="11" height="15" rx="2"/><path d="M8.5 7.5h2.5M18.5 6.5l1.5.4-3 13.2-8.5-2"/>',

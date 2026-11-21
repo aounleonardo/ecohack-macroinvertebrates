@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "etl": "python3 ../scripts/etl_kieco.py && python3 ../scripts/build_river_reaches.py && python3 ../scripts/etl_taxa.py && python3 ../scripts/etl_site_series.py",
+    "etl": "python3 ../scripts/etl_kieco.py && python3 ../scripts/etl_taxa.py && python3 ../scripts/etl_site_series.py",
+    "etl:rivers": "python3 ../scripts/build_river_reaches.py",
+    "etl:full": "npm run etl && npm run etl:rivers",
     "fetch-thumbs": "python3 ../scripts/etl_taxa.py && python3 ../scripts/fetch_family_thumbs.py",
     "prebuild": "npm run etl",
     "dev": "vite",

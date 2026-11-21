@@ -264,9 +264,28 @@ def extract_osm_reach(lon: float, lat: float, ways: list[list[tuple[float, float
     return slim
 
 
+def should_keep_existing_reaches() -> bool:
+    """Netlify/CI has no OSM cache — do not overwrite repo GeoJSON with chord fallbacks."""
+    if OSM_PATH.exists():
+        return False
+    if not OUT_REACHES.exists():
+        return False
+    try:
+        meta = json.loads(OUT_REACHES.read_text(encoding="utf-8")).get("metadata", {})
+    except (json.JSONDecodeError, OSError):
+        return False
+    return meta.get("osm_ways", 0) > 1000
+
+
 def main() -> None:
     if not SITES_PATH.exists():
         raise SystemExit(f"Missing {SITES_PATH}")
+    if should_keep_existing_reaches():
+        print(
+            f"Skipping reach rebuild: no {OSM_PATH.name} on this machine; "
+            f"keeping OSM-snapped {OUT_REACHES.name} from the repo."
+        )
+        return
     sites = load_sites()
     edges = build_monitoring_edges(sites)
     osm = load_osm_lines()

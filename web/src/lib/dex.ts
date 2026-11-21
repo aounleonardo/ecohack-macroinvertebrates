@@ -1,7 +1,7 @@
 /**
- * The volunteer's Dex: which of the nine families they've recorded.
+ * The volunteer's Dex: which of the 40 common families they've recorded.
  * Hackathon stand-in for a user account: stored per browser, seeded with a
- * demo set (5/9) so the "new for you" states show up straight away.
+ * demo set so map rows still show ticks vs "new for you".
  */
 const KEY = "darwinflow.dex.v1";
 const DEMO_SEED = ["Chironomidae", "Baetidae", "Elmidae", "Hydropsychidae", "Gammaridae"];

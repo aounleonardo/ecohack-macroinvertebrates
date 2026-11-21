@@ -1,5 +1,7 @@
 [build]
   base = "web"
+  # prebuild runs etl (sites/taxa/series) but NOT build_river_reaches — needs local OSM cache.
+  # Coloured reaches come from committed web/public/data/river_reaches.geojson (OSM-snapped).
   command = "npm run build"
   publish = "dist"
 

@@ -3,17 +3,32 @@ import type { TaxonCatalogEntry } from "./taxa";
 
 export type Order = "beetle" | "mayfly" | "stonefly" | "caddis" | "fly-larva" | "crustacean" | "snail" | "worm" | "leech";
 
-/** The nine Dex families (each has a full ink-and-watercolour plate in /art/families). */
-export const DEX_FAMILIES = [
+/** Full ink-and-watercolour plates in /art/families (Dex “premium” tier). */
+export const PLATE_FAMILIES = [
   "Chironomidae", "Baetidae", "Elmidae", "Heptageniidae", "Leuctridae",
   "Simuliidae", "Rhyacophilidae", "Hydropsychidae", "Gammaridae",
 ] as const;
-const ART = new Set<string>(DEX_FAMILIES);
+
+/** Top 40 families by Wales KiEco prevalence — collectible Dex cards (silhouette or plate). */
+export const DEX_FAMILIES = [
+  "Chironomidae", "Baetidae", "Elmidae", "Heptageniidae", "Leuctridae",
+  "Simuliidae", "Rhyacophilidae", "Hydropsychidae", "Gammaridae",
+  "Sericostomatidae", "Hydrachnidae", "Limnephilidae", "Empididae", "Hydrobiidae",
+  "Ephemerellidae", "Perlodidae", "Planariidae", "Nemouridae", "Asellidae",
+  "Glossosomatidae", "Ceratopogonidae", "Dytiscidae", "Hydraenidae", "Caenidae",
+  "Pediciidae", "Lepidostomatidae", "Tipulidae", "Erpobdellidae", "Gyrinidae",
+  "Hydroptilidae", "Polycentropodidae", "Goeridae", "Chloroperlidae", "Leptoceridae",
+  "Glossiphoniidae", "Taeniopterygidae", "Lumbricidae", "Leptophlebiidae", "Tateidae",
+  "Odontoceridae",
+] as const;
+
+const PLATES = new Set<string>(PLATE_FAMILIES);
+const DEX_SET = new Set<string>(DEX_FAMILIES);
 
 const g = (order: Order, names: string) => names.split(" ").map((n) => [n, order] as const);
 
 /**
- * Order silhouette per family. Groups outside the nine silhouettes use the nearest
+ * Order silhouette per family. Groups outside the plated Dex set use the nearest
  * shape (dragonflies → mayfly nymph, bugs and mites → beetle, flatworms → leech,
  * pea mussels → snail, aquatic moths and alderflies → caddis larva).
  * null = not a freshwater invertebrate (fish, birds, terrestrial strays): hidden from family lists.
@@ -34,8 +49,8 @@ export const FAMILY_ORDER: Record<string, Order | null> = Object.fromEntries([
 
 export const orderOf = (family: string): Order => FAMILY_ORDER[family] ?? "worm";
 export const isInvertebrate = (family: string) => FAMILY_ORDER[family] !== null;
-export const hasArt = (family: string) => ART.has(family);
-export const isDexFamily = (family: string) => ART.has(family);
+export const hasArt = (family: string) => PLATES.has(family);
+export const isDexFamily = (family: string) => DEX_SET.has(family);
 export const slugOf = (family: string) => family.toLowerCase();
 
 export type Sensitivity = "EPT" | "Sensitive" | "Tolerant" | null;

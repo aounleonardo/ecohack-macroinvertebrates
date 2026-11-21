@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AppHeader, type Profile } from "./components/AppHeader";
+import { DexScreen } from "./components/DexScreen";
 import { SiteSidebar } from "./components/SiteSidebar";
 import { MapView } from "./map/MapView";
 import { loadSitesGeoJSON, parseSiteProperties, type SitesFeatureCollection } from "./lib/data";
@@ -21,6 +22,13 @@ async function loadLines(path: string, hint: string): Promise<Lines> {
   return res.json() as Promise<Lines>;
 }
 
+/** OSM river linework is optional on Netlify (large; gitignored). Carto basemap still shows water. */
+async function loadRiverBackground(): Promise<Lines> {
+  const res = await fetch("/data/wales_rivers_background.geojson");
+  if (!res.ok) return { type: "FeatureCollection", features: [] };
+  return res.json() as Promise<Lines>;
+}
+
 export default function App() {
   const [data, setData] = useState<{ background: Lines; reaches: Lines; sites: SitesFeatureCollection } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -31,12 +39,14 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [focusNonce, setFocusNonce] = useState(0);
   const [dex] = useState(loadDex);
+  const [showDex, setShowDex] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const dexCount = DEX_FAMILIES.filter((f) => dex.has(f)).length;
 
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      loadLines("/data/wales_rivers_background.geojson", "run npm run etl"),
+      loadRiverBackground(),
       loadLines("/data/river_reaches.geojson", "run npm run etl"),
       loadSitesGeoJSON(),
     ])
@@ -90,35 +100,42 @@ export default function App() {
       <AppHeader
         catchment={catchment} onCatchment={changeCatchment}
         profile={profile} onProfile={setProfile}
-        dexCount={DEX_FAMILIES.filter((f) => dex.has(f)).length} dexTotal={DEX_FAMILIES.length}
-        onDex={() => setToast("The Dex screen is next on the build list")}
+        dexCount={dexCount}
+        dexTotal={DEX_FAMILIES.length}
+        onDex={() => setShowDex(true)}
         onAssignRed={assignRed}
       />
-      <main className="app__main">
-        {data ? (
-          <MapView
-            background={data.background} reaches={data.reaches} sites={data.sites}
-            catchment={catchment} selectedId={selectedId}
-            selectedStatus={site ? statusOf(site.staleness) : null}
-            selectedName={site ? formatSiteName(site.site_name) : null}
-            focusNonce={focusNonce} onSelect={setSelectedId}
-          />
+      <main className={showDex ? "app__main app__main--dex" : "app__main"}>
+        {showDex ? (
+          <DexScreen dex={dex} catalog={catalog} dexCount={dexCount} onClose={() => setShowDex(false)} />
         ) : (
-          <section className="map map--loading" aria-busy="true"><p className="caption">{error ?? "Loading Welsh rivers…"}</p></section>
-        )}
-        {site ? (
-          <SiteSidebar
-            key={site.site_id} site={site} profile={profile} catalog={catalog} series={series[site.site_id]} dex={dex}
-            onClose={() => setSelectedId(null)}
-            onUpload={() => setToast("The upload screen is next on the build list")}
-            onToast={setToast}
-          />
-        ) : (
-          <aside className="sidebar sidebar--empty">
-            <h2 className="h-display-s">Pick a river reach</h2>
-            <p className="body-2">Tap a coloured band or pin on the map, or let us choose an overdue one.</p>
-            <button type="button" className="btn btn--primary" onClick={assignRed}>Assign me a red site</button>
-          </aside>
+          <>
+            {data ? (
+              <MapView
+                background={data.background} reaches={data.reaches} sites={data.sites}
+                catchment={catchment} selectedId={selectedId}
+                selectedStatus={site ? statusOf(site.staleness) : null}
+                selectedName={site ? formatSiteName(site.site_name) : null}
+                focusNonce={focusNonce} onSelect={setSelectedId}
+              />
+            ) : (
+              <section className="map map--loading" aria-busy="true"><p className="caption">{error ?? "Loading Welsh rivers…"}</p></section>
+            )}
+            {site ? (
+              <SiteSidebar
+                key={site.site_id} site={site} profile={profile} catalog={catalog} series={series[site.site_id]} dex={dex}
+                onClose={() => setSelectedId(null)}
+                onUpload={() => setToast("The upload screen is next on the build list")}
+                onToast={setToast}
+              />
+            ) : (
+              <aside className="sidebar sidebar--empty">
+                <h2 className="h-display-s">Pick a river reach</h2>
+                <p className="body-2">Tap a coloured band or pin on the map, or let us choose an overdue one.</p>
+                <button type="button" className="btn btn--primary" onClick={assignRed}>Assign me a red site</button>
+              </aside>
+            )}
+          </>
         )}
       </main>
       {toast && <div className="toast" role="status">{toast}</div>}
