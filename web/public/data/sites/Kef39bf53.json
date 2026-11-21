@@ -1,0 +1,582 @@
+{
+"site_id": "Kef39bf53",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Baetidae",
+"slug": "baetidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Chironomidae",
+"slug": "chironomidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Chloroperlidae",
+"slug": "chloroperlidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Dytiscidae",
+"slug": "dytiscidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Elmidae",
+"slug": "elmidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Ephemerellidae",
+"slug": "ephemerellidae",
+"present_on_latest": true,
+"surveys_with_family": 4,
+"surveys_at_site": 6,
+"site_presence_pct": 66.7,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.33,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2004,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "absent"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Leuctridae",
+"slug": "leuctridae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Limnephilidae",
+"slug": "limnephilidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Perlodidae",
+"slug": "perlodidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Polycentropodidae",
+"slug": "polycentropodidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 6,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2003,
+2004,
+2005,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "present",
+"count": null
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Rhyacophilidae",
+"slug": "rhyacophilidae",
+"present_on_latest": true,
+"surveys_with_family": 4,
+"surveys_at_site": 6,
+"site_presence_pct": 66.7,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.33,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2004,
+2006,
+2007,
+2008
+],
+"timeline": [
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "present",
+"count": null
+},
+{
+"year": 2005,
+"status": "absent"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "present",
+"count": null
+},
+{
+"year": 2008,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}

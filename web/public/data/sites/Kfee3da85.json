@@ -1,0 +1,293 @@
+{
+"site_id": "Kfee3da85",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Baetidae",
+"slug": "baetidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Chironomidae",
+"slug": "chironomidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Dixidae",
+"slug": "dixidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Dugesiidae",
+"slug": "dugesiidae",
+"present_on_latest": true,
+"surveys_with_family": 1,
+"surveys_at_site": 3,
+"site_presence_pct": 33.3,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 0.0,
+"second_half_presence_rate": 0.5
+},
+"years_seen": [
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "absent"
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Dytiscidae",
+"slug": "dytiscidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Elmidae",
+"slug": "elmidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Limnephilidae",
+"slug": "limnephilidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Odontoceridae",
+"slug": "odontoceridae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Planariidae",
+"slug": "planariidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 3,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2014,
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "present",
+"count": null
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Tipulidae",
+"slug": "tipulidae",
+"present_on_latest": true,
+"surveys_with_family": 1,
+"surveys_at_site": 3,
+"site_presence_pct": 33.3,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 0.0,
+"second_half_presence_rate": 0.5
+},
+"years_seen": [
+2015
+],
+"timeline": [
+{
+"year": 2014,
+"status": "absent"
+},
+{
+"year": 2015,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}

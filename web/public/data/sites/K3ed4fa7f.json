@@ -1,0 +1,375 @@
+{
+"site_id": "K3ed4fa7f",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Athericidae",
+"slug": "athericidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Baetidae",
+"slug": "baetidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Chironomidae",
+"slug": "chironomidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Gyrinidae",
+"slug": "gyrinidae",
+"present_on_latest": true,
+"surveys_with_family": 1,
+"surveys_at_site": 2,
+"site_presence_pct": 50.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 0.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Heptageniidae",
+"slug": "heptageniidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Hydrobiidae",
+"slug": "hydrobiidae",
+"present_on_latest": true,
+"surveys_with_family": 1,
+"surveys_at_site": 2,
+"site_presence_pct": 50.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 0.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Hydropsychidae",
+"slug": "hydropsychidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Lepidostomatidae",
+"slug": "lepidostomatidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Leuctridae",
+"slug": "leuctridae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Limnephilidae",
+"slug": "limnephilidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Nemouridae",
+"slug": "nemouridae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Pediciidae",
+"slug": "pediciidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Perlodidae",
+"slug": "perlodidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Rhyacophilidae",
+"slug": "rhyacophilidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Sericostomatidae",
+"slug": "sericostomatidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Simuliidae",
+"slug": "simuliidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2013
+],
+"timeline": [
+{
+"year": 2013,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}

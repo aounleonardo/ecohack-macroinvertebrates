@@ -1,0 +1,1629 @@
+{
+"site_id": "K33e0c3c2",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Asellidae",
+"slug": "asellidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 10,
+"site_presence_pct": 20.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 0.2,
+"second_half_presence_rate": 0.2
+},
+"years_seen": [
+2000,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "absent"
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "absent"
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Baetidae",
+"slug": "baetidae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Chironomidae",
+"slug": "chironomidae",
+"present_on_latest": true,
+"surveys_with_family": 9,
+"surveys_at_site": 10,
+"site_presence_pct": 90.0,
+"trend": "declining",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 0.8
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Chloroperlidae",
+"slug": "chloroperlidae",
+"present_on_latest": true,
+"surveys_with_family": 9,
+"surveys_at_site": 10,
+"site_presence_pct": 90.0,
+"trend": "declining",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 0.8
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "absent"
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Elmidae",
+"slug": "elmidae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Ephemerellidae",
+"slug": "ephemerellidae",
+"present_on_latest": true,
+"surveys_with_family": 7,
+"surveys_at_site": 10,
+"site_presence_pct": 70.0,
+"trend": "declining",
+"trend_detail": {
+"first_half_presence_rate": 0.8,
+"second_half_presence_rate": 0.6
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "absent"
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Gammaridae",
+"slug": "gammaridae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 10,
+"site_presence_pct": 20.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.0,
+"second_half_presence_rate": 0.4
+},
+"years_seen": [
+2006,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "absent"
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "absent"
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Goeridae",
+"slug": "goeridae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Heptageniidae",
+"slug": "heptageniidae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Hydraenidae",
+"slug": "hydraenidae",
+"present_on_latest": true,
+"surveys_with_family": 6,
+"surveys_at_site": 10,
+"site_presence_pct": 60.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.2,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "absent"
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Hydropsychidae",
+"slug": "hydropsychidae",
+"present_on_latest": true,
+"surveys_with_family": 9,
+"surveys_at_site": 10,
+"site_presence_pct": 90.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.8,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Leuctridae",
+"slug": "leuctridae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Nemouridae",
+"slug": "nemouridae",
+"present_on_latest": true,
+"surveys_with_family": 9,
+"surveys_at_site": 10,
+"site_presence_pct": 90.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.8,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Pediciidae",
+"slug": "pediciidae",
+"present_on_latest": true,
+"surveys_with_family": 4,
+"surveys_at_site": 10,
+"site_presence_pct": 40.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.0,
+"second_half_presence_rate": 0.8
+},
+"years_seen": [
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "absent"
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "absent"
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Perlodidae",
+"slug": "perlodidae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Piscicolidae",
+"slug": "piscicolidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 10,
+"site_presence_pct": 30.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.2,
+"second_half_presence_rate": 0.4
+},
+"years_seen": [
+2000,
+2006,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "absent"
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Planariidae",
+"slug": "planariidae",
+"present_on_latest": true,
+"surveys_with_family": 9,
+"surveys_at_site": 10,
+"site_presence_pct": 90.0,
+"trend": "declining",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 0.8
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Polycentropodidae",
+"slug": "polycentropodidae",
+"present_on_latest": true,
+"surveys_with_family": 3,
+"surveys_at_site": 10,
+"site_presence_pct": 30.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.2,
+"second_half_presence_rate": 0.4
+},
+"years_seen": [
+2003,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "absent"
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "absent"
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "absent"
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Rhyacophilidae",
+"slug": "rhyacophilidae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Sericostomatidae",
+"slug": "sericostomatidae",
+"present_on_latest": true,
+"surveys_with_family": 10,
+"surveys_at_site": 10,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "present",
+"count": null
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Simuliidae",
+"slug": "simuliidae",
+"present_on_latest": true,
+"surveys_with_family": 9,
+"surveys_at_site": 10,
+"site_presence_pct": 90.0,
+"trend": "increasing",
+"trend_detail": {
+"first_half_presence_rate": 0.8,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2000,
+2003,
+2006,
+2009,
+2012
+],
+"timeline": [
+{
+"year": 2000,
+"status": "present",
+"count": null
+},
+{
+"year": 2001,
+"status": "missing"
+},
+{
+"year": 2002,
+"status": "missing"
+},
+{
+"year": 2003,
+"status": "absent"
+},
+{
+"year": 2004,
+"status": "missing"
+},
+{
+"year": 2005,
+"status": "missing"
+},
+{
+"year": 2006,
+"status": "present",
+"count": null
+},
+{
+"year": 2007,
+"status": "missing"
+},
+{
+"year": 2008,
+"status": "missing"
+},
+{
+"year": 2009,
+"status": "present",
+"count": null
+},
+{
+"year": 2010,
+"status": "missing"
+},
+{
+"year": 2011,
+"status": "missing"
+},
+{
+"year": 2012,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}

@@ -1,0 +1,53 @@
+{
+"site_id": "K3167fcc1",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Asellidae",
+"slug": "asellidae",
+"present_on_latest": true,
+"surveys_with_family": 1,
+"surveys_at_site": 1,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 0.0
+},
+"years_seen": [
+2011
+],
+"timeline": [
+{
+"year": 2011,
+"status": "present",
+"count": null
+}
+]
+},
+{
+"family": "Niphargidae",
+"slug": "niphargidae",
+"present_on_latest": true,
+"surveys_with_family": 1,
+"surveys_at_site": 1,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 0.0
+},
+"years_seen": [
+2011
+],
+"timeline": [
+{
+"year": 2011,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}

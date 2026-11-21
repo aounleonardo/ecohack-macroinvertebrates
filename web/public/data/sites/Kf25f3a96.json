@@ -1,0 +1,30 @@
+{
+"site_id": "Kf25f3a96",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Cottidae",
+"slug": "cottidae",
+"present_on_latest": true,
+"surveys_with_family": 2,
+"surveys_at_site": 2,
+"site_presence_pct": 100.0,
+"trend": "unknown",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2018
+],
+"timeline": [
+{
+"year": 2018,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}

@@ -1,0 +1,8 @@
+{
+  "image_key": "kick-sampling-tray-still",
+  "detections": [
+    { "family": "Baetidae", "confidence": 0.92, "bbox": [120, 80, 200, 140] },
+    { "family": "Chironomidae", "confidence": 0.88, "bbox": [240, 100, 320, 160] },
+    { "family": "Gammaridae", "confidence": 0.85, "bbox": [400, 90, 480, 150] }
+  ]
+}

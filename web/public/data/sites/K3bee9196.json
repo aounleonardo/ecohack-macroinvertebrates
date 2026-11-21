@@ -1,0 +1,30 @@
+{
+"site_id": "K3bee9196",
+"latest_sample_partial": false,
+"families": [
+{
+"family": "Astacidae",
+"slug": "astacidae",
+"present_on_latest": true,
+"surveys_with_family": 4,
+"surveys_at_site": 4,
+"site_presence_pct": 100.0,
+"trend": "stable",
+"trend_detail": {
+"first_half_presence_rate": 1.0,
+"second_half_presence_rate": 1.0
+},
+"years_seen": [
+2020
+],
+"timeline": [
+{
+"year": 2020,
+"status": "present",
+"count": null
+}
+]
+}
+],
+"_demo_note": "Trend compares first vs second half of site's survey history in KiEco only."
+}
