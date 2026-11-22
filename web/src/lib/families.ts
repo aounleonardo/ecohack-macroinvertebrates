@@ -20,6 +20,8 @@ export const DEX_FAMILIES = [
   "Hydroptilidae", "Polycentropodidae", "Goeridae", "Chloroperlidae", "Leptoceridae",
   "Glossiphoniidae", "Taeniopterygidae", "Lumbricidae", "Leptophlebiidae", "Tateidae",
   "Odontoceridae",
+  // Tray CV often returns these even when KiEco kick-sample counts are low:
+  "Staphylinidae", "Hydrophilidae", "Scirtidae", "Muscidae",
 ] as const;
 
 const PLATES = new Set<string>(PLATE_FAMILIES);
@@ -74,7 +76,10 @@ const COMMON_NAMES: Record<string, string> = {
   Leptoceridae: "Long-horned caddis", Glossiphoniidae: "Glossiphoniid leeches", Taeniopterygidae: "Winter stoneflies", Lumbricidae: "Earthworms",
   Leptophlebiidae: "Prong-gilled mayflies", Tateidae: "Jenkins’ spire snail", Odontoceridae: "Odontocerid caddis", Ephemeridae: "Burrowing mayflies",
   Limoniidae: "Limoniid craneflies", Psychodidae: "Moth fly larvae", Psychomyiidae: "Tube-making caddis", Hydrophilidae: "Water scavenger beetles",
-  Muscidae: "Muscid fly larvae", Perlidae: "Large stoneflies", Scirtidae: "Marsh beetles", Athericidae: "Water snipe fly larvae",
+  Perlidae: "Large stoneflies",
+  Staphylinidae: "Rove beetles",
+  Scirtidae: "Marsh beetles",
+  Muscidae: "Muscid fly larvae", Athericidae: "Water snipe fly larvae",
   Dugesiidae: "Flatworms", Piscicolidae: "Fish leeches", Dixidae: "Meniscus midges", Sphaeriidae: "Pea mussels",
   Philopotamidae: "Finger-net caddis", Brachycentridae: "Brachycentrid caddis", Crangonyctidae: "Crangonyx shrimps", Tabanidae: "Horsefly larvae",
   Aphelocheiridae: "River saucer bugs", Veliidae: "Water crickets", Sialidae: "Alderflies", Haliplidae: "Crawling water beetles",

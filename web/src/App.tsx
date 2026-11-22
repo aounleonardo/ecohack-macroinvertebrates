@@ -9,7 +9,7 @@ import { ROD_DEMO_SITE } from "./lib/rodDemo";
 import type { CvShortcut } from "./components/DevTools";
 import { MapView } from "./map/MapView";
 import { loadSitesGeoJSON, parseSiteProperties, type SitesFeatureCollection } from "./lib/data";
-import { DEX_FAMILIES, commonName, isDexFamily } from "./lib/families";
+import { DEX_FAMILIES, commonName, isDexFamily, isInvertebrate } from "./lib/families";
 import { loadDex, saveDex } from "./lib/dex";
 import { formatSiteName } from "./lib/siteName";
 import { loadSiteSeries, type SiteSeries } from "./lib/series";
@@ -133,16 +133,22 @@ export default function App() {
   };
 
   const addToDex = (families: string[]) => {
-    const fresh = families.filter((f) => isDexFamily(f) && !dex.has(f));
-    const next = new Set([...dex, ...families.filter(isDexFamily)]);
+    const dexable = families.filter((f) => isDexFamily(f) && isInvertebrate(f));
+    const fresh = dexable.filter((f) => !dex.has(f));
+    const journalOnly = families.filter((f) => isInvertebrate(f) && !isDexFamily(f));
+    const next = new Set([...dex, ...dexable]);
     setDex(next);
     saveDex(next);
     const cvSite = cv ? byId.get(cv.siteId)?.properties : undefined;
     if (cvSite?.staleness === "stale") setToast("Badge earned: Sampled a red site");
     if (fresh.length) setUnlock({ families: fresh, siteName: siteNameOf(cv?.siteId ?? "") });
-    else {
+    else if (journalOnly.length) {
       setCv(null);
-      setToast("Saved. No new Dex families this time.");
+      const names = journalOnly.map((f) => commonName(f, catalog)).join(", ");
+      setToast(`Recorded ${names}, but ${journalOnly.length === 1 ? "it isn't" : "they aren't"} in the ${DEX_FAMILIES.length}-card Dex set yet.`);
+    } else {
+      setCv(null);
+      setToast(dexable.length ? "Already in your Dex — nothing new to unlock." : "Saved. No new Dex families this time.");
     }
   };
 

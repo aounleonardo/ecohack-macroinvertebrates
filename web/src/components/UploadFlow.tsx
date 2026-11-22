@@ -225,7 +225,10 @@ export function UploadFlow({ siteId, siteName, dex, common, onClose, onAddToDex,
                   <Icon name="dex" size={18} />Add to my Dex
                 </button>
               )}
-              {newOnes.length > 0 && <p className="caption center" style={{ color: "var(--moss-700)", fontWeight: 600 }}>{newOnes.length} new famil{newOnes.length === 1 ? "y" : "ies"}: {newOnes.map(common).join(", ")}</p>}
+              {newOnes.length > 0 && <p className="caption center" style={{ color: "var(--moss-700)", fontWeight: 600 }}>{newOnes.length} new Dex famil{newOnes.length === 1 ? "y" : "ies"}: {newOnes.map(common).join(", ")}</p>}
+              {fams.some((f) => !isDexFamily(f.family) && !isTentative(f)) && (
+                <p className="caption center">Some IDs aren’t Dex cards (outside the curated set) — they’ll be noted but won’t unlock a card.</p>
+              )}
               {!review && <button type="button" className="btn btn--ghost btn--sm" onClick={() => setStep("pick")}>Upload another photo</button>}
             </div>
           </section>

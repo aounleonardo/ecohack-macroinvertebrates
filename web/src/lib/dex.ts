@@ -1,5 +1,5 @@
 /**
- * The volunteer's Dex: which of the 40 common families they've recorded.
+ * The volunteer's Dex: which of the curated Dex families they've recorded.
  * Hackathon stand-in for a user account: stored per browser, seeded with a
  * demo set so map rows still show ticks vs "new for you".
  */

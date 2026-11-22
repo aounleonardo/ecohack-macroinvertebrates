@@ -33,7 +33,7 @@ export function UnlockModal({ families, siteName, dexCount, catalog, common, onC
       <div className="unlock__cards">
         {shown.map((f, i) => (
           <div key={f} className="unlock__card" style={{ animationDelay: `${i * 140}ms` }}>
-            <TradingCard family={f} number={DEX_FAMILIES.indexOf(f as (typeof DEX_FAMILIES)[number]) + 1} common={common(f)}
+            <TradingCard family={f} number={Math.max(1, DEX_FAMILIES.indexOf(f as (typeof DEX_FAMILIES)[number]) + 1)} common={common(f)}
               sensitivity={sensitivityOf(catalog?.get(f))} where={siteName} when={today} isNew width={shown.length > 1 ? 250 : 300} />
           </div>
         ))}
