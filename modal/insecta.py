@@ -30,8 +30,12 @@ MIN_ONNX_BYTES = {
 }
 
 APP_NAME = "macroinvertebrate-insecta"
-# Modal still requires a card on file for GPU workers (credits apply). Use `L4` for demo speed.
-DEMO_GPU = "L4"  # set to None for CPU-only (no card); Modal still needs a card on file for GPU
+# GPU workers often queue when capacity is tight — CPU ONNX is reliable for tray photos.
+# Set to e.g. "L4" only if you have GPU quota and want lower latency per box.
+DEMO_GPU: str | None = None
+MODAL_CPU = 16.0
+MODAL_MEMORY_MB = 16_384
+ORT_VERSION = "1.18.1"
 MIN_BOX = 30
 ID_PROB_THRESH = 0.10
 DET_CONF = 0.5
@@ -44,6 +48,12 @@ INFERENCE_PROFILES: dict[str, dict[str, float | int]] = {
     "default": {"det_conf": DET_CONF, "id_prob": ID_PROB_THRESH, "min_box": MIN_BOX},
 }
 
+_ort_wheel = (
+    f"onnxruntime-gpu=={ORT_VERSION}"
+    if DEMO_GPU
+    else f"onnxruntime=={ORT_VERSION}"
+)
+
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install("git", "libglib2.0-0", "libgl1")
@@ -52,8 +62,13 @@ image = (
         "opencv-python-headless>=4.8.0",
         "khandy>=0.1.8",
         "numpy>=1.26.0",
-        # Pin below latest: ORT 1.32 wants CUDA 13 libs; Modal L4 images are often CUDA 12.
-        "onnxruntime-gpu==1.18.1",
+        _ort_wheel,
+    )
+    .env(
+        {
+            "OMP_NUM_THREADS": str(int(MODAL_CPU)),
+            "INSECTA_FORCE_CPU_ORT": "0" if DEMO_GPU else "1",
+        }
     )
     .run_commands(
         f"mkdir -p {REMOTE_PKG}",
@@ -112,14 +127,14 @@ def _load_image_from_bytes(data: bytes):
 
 _cls_kw: dict = {
     "image": image,
-    "memory": 8192,
+    "memory": MODAL_MEMORY_MB,
     "timeout": 600,
     "scaledown_window": 300,
 }
 if DEMO_GPU:
     _cls_kw["gpu"] = DEMO_GPU
 else:
-    _cls_kw["cpu"] = 2.0
+    _cls_kw["cpu"] = MODAL_CPU
 
 
 @app.cls(**_cls_kw)
@@ -136,6 +151,13 @@ class InsectaModel:
         self.detector = InsectDetector()
         print("[insecta] Loading identifier ONNX …", flush=True)
         self.identifier = InsectIdentifier()
+        import onnxruntime as ort
+
+        print(
+            f"[insecta] ORT device={ort.get_device()!r} "
+            f"providers={ort.get_available_providers()!r}",
+            flush=True,
+        )
         if "/root" not in sys.path:
             sys.path.insert(0, "/root")
         from kieco_resolve import KiecoResolver
@@ -221,7 +243,7 @@ def main(image_path: str, source: str = "kick_tray") -> None:
     print(f"Running insecta on {path} ({len(data)} bytes) …")
     print(
         "If this spinner sits idle, open the run URL above → Logs "
-        "(first L4 start often 2–5 min: GPU + HF ONNX download).",
+        "(first start often 2–5 min: HF ONNX download + CPU worker boot).",
     )
     out = InsectaModel().infer.remote(data, source)
     print(json.dumps(out, indent=2, ensure_ascii=False))

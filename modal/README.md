@@ -8,7 +8,7 @@ Uses [Genius-Society/insecta](https://huggingface.co/Genius-Society/insecta) via
 - `pip install modal` (or `python3 -m modal`)
 - Modal token: root `.env` with `MODAL_TOKEN_ID` / `MODAL_TOKEN_SECRET`, or `modal token set`
 
-## One-off GPU test (no deploy)
+## One-off test (no deploy)
 
 From repo root:
 
@@ -53,13 +53,13 @@ python3 -m modal deploy modal/insecta.py
 ```
 
 App name: `macroinvertebrate-insecta`, class `InsectaModel`, method `infer`.  
-GPU: **L4** (change in `insecta.py` if needed). First container start downloads ~50MB of ONNX from HF.
+**Default compute:** **16 CPU cores**, 16 GiB RAM, `onnxruntime` CPU EP (set `DEMO_GPU = "L4"` in `insecta.py` to try GPU again). First container start downloads ~50MB of ONNX from HF.
 
 ## Log noise (usually safe to ignore)
 
 | Message | Meaning |
 | ------- | ------- |
-| CUDA / `libcublasLt` | ORT tried GPU EP, failed, **runs on CPU** — results still valid; fix = CUDA base image or pinned `onnxruntime-gpu` (see `insecta.py`). |
+| CUDA / `libcublasLt` | Only if `DEMO_GPU` is set: ORT may fall back to CPU. CPU-only deploy uses plain `onnxruntime`. |
 | PyTorch not installed | khandy optional import — ignore. |
 | HF unauthenticated | Optional `HF_TOKEN` on Modal for faster HF downloads. |
 | `crop_or_pad` deprecated | Upstream quarrying warning — ignore. |
